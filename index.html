@@ -6,528 +6,367 @@
 <title>Jacks Butter — Drop 1</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  :root {
-    --bg: #EBE7E1;
-    --brown: #2E2114;
-    --brown-light: rgba(46, 33, 20, 0.6);
-    --brown-subtle: rgba(46, 33, 20, 0.1);
-    --gold: #C8A96E;
-    --gold-light: rgba(200, 169, 110, 0.15);
-    --cream: #FFF8E7;
-    --success: #4A7C59;
-    --error: #C45B4A;
-  }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background-color: var(--bg);
-    color: var(--brown);
-    min-height: 100dvh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 24px 20px;
-    overflow-x: hidden;
-  }
-
-  .container {
-    width: 100%;
-    max-width: 420px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    animation: fadeUp 0.8s ease-out both;
-  }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-6px); }
-    75% { transform: translateX(6px); }
-  }
-
-  .brand-mark {
-    font-family: 'Playfair Display', serif;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--brown);
-    margin-bottom: 48px;
-    opacity: 0.7;
-  }
-
-  .headline {
-    font-family: 'Playfair Display', serif;
-    font-size: 42px;
-    font-weight: 700;
-    line-height: 1.1;
-    text-align: center;
-    margin-bottom: 12px;
-    letter-spacing: -0.5px;
-  }
-
-  .headline em {
-    font-style: italic;
-    font-weight: 400;
-  }
-
-  .subheadline {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
-    font-weight: 300;
-    color: var(--brown-light);
-    text-align: center;
-    margin-bottom: 48px;
-    line-height: 1.5;
-    max-width: 300px;
-  }
-
-  .form-wrapper {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .input-group {
-    position: relative;
-    width: 100%;
-  }
-
-  .input-group label {
-    display: block;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--brown-light);
-    margin-bottom: 8px;
-  }
-
-  .input-group input {
-    width: 100%;
-    padding: 16px 18px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    color: var(--brown);
-    background: var(--cream);
-    border: 1.5px solid var(--brown-subtle);
-    border-radius: 12px;
-    outline: none;
-    transition: all 0.3s ease;
-    -webkit-appearance: none;
-  }
-
-  .input-group input:focus {
-    border-color: var(--gold);
-    box-shadow: 0 0 0 3px var(--gold-light);
-  }
-
-  .input-group input::placeholder {
-    color: rgba(46, 33, 20, 0.3);
-  }
-
-  .checkbox-group {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 4px 0;
-    cursor: pointer;
-    -webkit-user-select: none;
-    user-select: none;
-  }
-
-  .checkbox-group input[type="checkbox"] { display: none; }
-
-  .checkbox-custom {
-    width: 22px;
-    height: 22px;
-    min-width: 22px;
-    border: 1.5px solid var(--brown-subtle);
-    border-radius: 6px;
-    background: var(--cream);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s ease;
-    margin-top: 1px;
-  }
-
-  .checkbox-group input[type="checkbox"]:checked + .checkbox-custom {
-    background: var(--brown);
-    border-color: var(--brown);
-  }
-
-  .checkbox-custom svg {
-    width: 12px;
-    height: 12px;
-    opacity: 0;
-    transition: opacity 0.2s ease;
-  }
-
-  .checkbox-group input[type="checkbox"]:checked + .checkbox-custom svg {
-    opacity: 1;
-  }
-
-  .checkbox-label {
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--brown-light);
-    line-height: 1.5;
-  }
-
-  .submit-btn {
-    width: 100%;
-    padding: 18px;
-    margin-top: 12px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--cream);
-    background: var(--brown);
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .submit-btn:active { transform: scale(0.98); }
-  .submit-btn:hover { opacity: 0.9; }
-  .submit-btn.loading { pointer-events: none; opacity: 0.7; }
-
-  .error-msg {
-    font-size: 13px;
-    color: var(--error);
-    text-align: center;
-    margin-top: 8px;
-    display: none;
-  }
-
-  .error-msg.show { display: block; }
-
-  .divider {
-    width: 40px;
-    height: 1px;
-    background: var(--brown-subtle);
-    margin: 40px auto;
-  }
-
-  .footer-note {
-    font-size: 12px;
-    font-weight: 300;
-    color: rgba(46, 33, 20, 0.35);
-    text-align: center;
-    line-height: 1.6;
-  }
-
-  .signup-count {
-    font-size: 12px;
-    font-weight: 400;
-    color: var(--gold);
-    text-align: center;
-    margin-top: 12px;
-    opacity: 0.8;
-  }
-
-  /* Success State */
-  .success-container {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    animation: fadeUp 0.6s ease-out both;
-  }
-
-  .success-container.show { display: flex; }
-  .form-container.hide { display: none; }
-
-  .success-icon {
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    background: var(--brown);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 28px;
-  }
-
-  .success-icon svg { width: 28px; height: 28px; }
-
-  .success-headline {
-    font-family: 'Playfair Display', serif;
-    font-size: 32px;
-    font-weight: 700;
-    margin-bottom: 12px;
-  }
-
-  .success-sub {
-    font-size: 15px;
-    font-weight: 300;
-    color: var(--brown-light);
-    line-height: 1.6;
-    max-width: 280px;
-    margin-bottom: 36px;
-  }
-
-  .success-ig {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 14px 28px;
-    background: var(--brown);
-    color: var(--cream);
-    border-radius: 12px;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-    transition: all 0.3s ease;
-  }
-
-  .success-ig:active { transform: scale(0.98); }
-
-  .reset-btn {
-    margin-top: 32px;
-    background: none;
-    border: none;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    font-weight: 400;
-    color: var(--brown-light);
-    cursor: pointer;
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  :root{--bg:#EBE7E1;--brown:#2E2114;--brown-light:rgba(46,33,20,0.6);--brown-subtle:rgba(46,33,20,0.1);--gold:#C8A96E;--gold-light:rgba(200,169,110,0.15);--cream:#FFF8E7;--error:#C45B4A}
+  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--brown);min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 20px;overflow-x:hidden}
+  .container{width:100%;max-width:420px;display:flex;flex-direction:column;align-items:center;animation:fadeUp .8s ease-out both}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+  .brand-mark{font-family:'Playfair Display',serif;font-size:13px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--brown);margin-bottom:48px;opacity:.7}
+  .headline{font-family:'Playfair Display',serif;font-size:42px;font-weight:700;line-height:1.1;text-align:center;margin-bottom:12px;letter-spacing:-.5px}
+  .headline em{font-style:italic;font-weight:400}
+  .subheadline{font-size:15px;font-weight:300;color:var(--brown-light);text-align:center;margin-bottom:48px;line-height:1.5;max-width:300px}
+  .form-wrapper{width:100%;display:flex;flex-direction:column;gap:16px}
+  .row{display:flex;gap:12px}.row .input-group{flex:1}
+  .input-group{position:relative;width:100%}
+  .input-group label{display:block;font-size:11px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--brown-light);margin-bottom:8px}
+  .input-group input{width:100%;padding:16px 18px;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:400;color:var(--brown);background:var(--cream);border:1.5px solid var(--brown-subtle);border-radius:12px;outline:none;transition:all .3s ease;-webkit-appearance:none}
+  .input-group input:focus{border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-light)}
+  .input-group input::placeholder{color:rgba(46,33,20,0.3)}
+  .checkbox-group{display:flex;align-items:flex-start;gap:12px;padding:4px 0;cursor:pointer;user-select:none}
+  .checkbox-group input[type="checkbox"]{display:none}
+  .checkbox-custom{width:22px;height:22px;min-width:22px;border:1.5px solid var(--brown-subtle);border-radius:6px;background:var(--cream);display:flex;align-items:center;justify-content:center;transition:all .2s ease;margin-top:1px}
+  .checkbox-group input[type="checkbox"]:checked+.checkbox-custom{background:var(--brown);border-color:var(--brown)}
+  .checkbox-custom svg{width:12px;height:12px;opacity:0;transition:opacity .2s}
+  .checkbox-group input[type="checkbox"]:checked+.checkbox-custom svg{opacity:1}
+  .checkbox-label{font-size:14px;font-weight:400;color:var(--brown-light);line-height:1.5}
+  .submit-btn{width:100%;padding:18px;margin-top:12px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--cream);background:var(--brown);border:none;border-radius:12px;cursor:pointer;transition:all .3s ease}
+  .submit-btn:active{transform:scale(.98)}.submit-btn:hover{opacity:.9}.submit-btn.loading{pointer-events:none;opacity:.7}
+  .order-btn{width:100%;padding:16px;margin-top:4px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:var(--brown);background:transparent;border:1.5px solid var(--brown-subtle);border-radius:12px;cursor:pointer;transition:all .3s ease}
+  .order-btn:hover{border-color:var(--gold);background:var(--gold-light)}
+  .error-msg{font-size:13px;color:var(--error);text-align:center;margin-top:8px;display:none}
+  .error-msg.show{display:block}
+  .divider{width:40px;height:1px;background:var(--brown-subtle);margin:40px auto}
+  .footer-note{font-size:12px;font-weight:300;color:rgba(46,33,20,0.35);text-align:center;line-height:1.6}
+  .success-container{display:none;flex-direction:column;align-items:center;text-align:center;animation:fadeUp .6s ease-out both}
+  .success-container.show{display:flex}.form-container.hide{display:none}
+  .success-icon{width:64px;height:64px;border-radius:50%;background:var(--brown);display:flex;align-items:center;justify-content:center;margin-bottom:28px}
+  .success-icon svg{width:28px;height:28px}
+  .success-headline{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;margin-bottom:12px}
+  .success-sub{font-size:15px;font-weight:300;color:var(--brown-light);line-height:1.6;max-width:280px;margin-bottom:36px}
+  .success-ig{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:var(--brown);color:var(--cream);border-radius:12px;text-decoration:none;font-size:14px;font-weight:500;letter-spacing:.5px;transition:all .3s ease}
+  .success-ig:active{transform:scale(.98)}
+  .reset-btn{margin-top:32px;background:none;border:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:400;color:var(--brown-light);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+  .overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(46,33,20,0.4);opacity:0;pointer-events:none;transition:opacity .3s ease;z-index:100}
+  .overlay.open{opacity:1;pointer-events:all}
+  .slide-panel{position:fixed;top:0;right:0;bottom:0;width:100%;max-width:420px;background:var(--bg);transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);z-index:101;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:32px 24px 40px}
+  .slide-panel.open{transform:translateX(0)}
+  .panel-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px}
+  .panel-title{font-family:'Playfair Display',serif;font-size:24px;font-weight:700}
+  .panel-close{width:36px;height:36px;border-radius:50%;background:var(--brown-subtle);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+  .panel-close:hover{background:rgba(46,33,20,0.2)}
+  .panel-close svg{width:16px;height:16px}
+  .product-cards{display:flex;flex-direction:column;gap:12px;margin-bottom:28px}
+  .product-card{padding:20px;border-radius:12px;border:1.5px solid var(--brown-subtle);background:var(--cream);cursor:pointer;transition:all .2s ease;display:flex;justify-content:space-between;align-items:center;user-select:none}
+  .product-card.selected{border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-light)}
+  .product-card:hover{border-color:var(--gold)}
+  .card-left{display:flex;flex-direction:column;gap:4px}
+  .card-name{font-weight:600;font-size:16px}
+  .card-detail{font-size:13px;color:var(--brown-light)}
+  .card-shipping{font-size:12px;color:var(--gold);font-weight:500}
+  .card-price{font-family:'Playfair Display',serif;font-size:22px;font-weight:700}
+  .discount-badge{display:inline-block;padding:6px 14px;border-radius:8px;background:rgba(200,169,110,0.15);color:var(--gold);font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:24px}
+  .section-label{font-size:11px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--brown-light);margin:24px 0 12px}
+  .flavor-selector{display:none;flex-direction:column;gap:12px;margin-bottom:8px}
+  .flavor-selector.show{display:flex}
+  .flavor-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+  .flavor-header-label{font-size:11px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--brown-light)}
+  .flavor-counter{font-size:12px;font-weight:500;color:var(--gold)}
+  .flavor-counter.full{color:var(--brown)}
+  .flavor-row{display:flex;justify-content:space-between;align-items:center;padding:16px;border-radius:12px;background:var(--cream);border:1.5px solid var(--brown-subtle)}
+  .flavor-name{font-size:15px;font-weight:500}
+  .stepper{display:flex;align-items:center;gap:14px}
+  .stepper-btn{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--brown-subtle);background:var(--cream);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:500;color:var(--brown);transition:all .15s ease;user-select:none;-webkit-user-select:none}
+  .stepper-btn:active{transform:scale(.9)}
+  .stepper-btn:hover{border-color:var(--gold);background:var(--gold-light)}
+  .stepper-btn.disabled{opacity:.25;pointer-events:none}
+  .stepper-count{font-size:18px;font-weight:600;min-width:20px;text-align:center}
+  .panel-input{width:100%;padding:14px 16px;font-family:'DM Sans',sans-serif;font-size:16px;color:var(--brown);background:var(--cream);border:1.5px solid var(--brown-subtle);border-radius:12px;outline:none;transition:all .3s ease;margin-bottom:12px;-webkit-appearance:none}
+  .panel-input:focus{border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-light)}
+  .panel-input::placeholder{color:rgba(46,33,20,0.3)}
+  .panel-row{display:flex;gap:12px}.panel-row .panel-input{flex:1}
+  .place-order-btn{width:100%;padding:18px;margin-top:20px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--cream);background:var(--brown);border:none;border-radius:12px;cursor:pointer;transition:all .3s ease}
+  .place-order-btn:active{transform:scale(.98)}.place-order-btn:hover{opacity:.9}.place-order-btn.loading{pointer-events:none;opacity:.7}
+  .panel-error{font-size:13px;color:var(--error);text-align:center;margin-top:8px;display:none}
+  .panel-error.show{display:block}
+  .panel-footer{font-size:11px;color:rgba(46,33,20,0.35);text-align:center;margin-top:20px;line-height:1.6}
+  .order-summary{padding:16px;border-radius:12px;background:rgba(46,33,20,0.04);margin-top:16px;display:none;margin-bottom:8px}
+  .order-summary.show{display:block}
+  .summary-row{display:flex;justify-content:space-between;align-items:center;padding:4px 0;font-size:14px}
+  .summary-row.total{font-weight:600;border-top:1px solid var(--brown-subtle);padding-top:10px;margin-top:6px}
+  .summary-discount{color:var(--gold)}
 </style>
 </head>
 <body>
 
 <div class="container">
-  
   <div class="brand-mark">Jacks Butter</div>
 
-  <!-- Form State -->
   <div class="form-container" id="formContainer">
     <h1 class="headline">Drop 1 is <em>coming</em></h1>
     <p class="subheadline">A2 cultured butter, made by a chef. Be the first to know before it sells out.</p>
-
     <div class="form-wrapper">
-      <div class="input-group">
-        <label>First Name</label>
-        <input type="text" id="firstName" placeholder="Your first name" autocomplete="given-name">
+      <div class="row">
+        <div class="input-group"><label>First Name</label><input type="text" id="firstName" placeholder="First" autocomplete="given-name"></div>
+        <div class="input-group"><label>Last Name</label><input type="text" id="lastName" placeholder="Last" autocomplete="family-name"></div>
       </div>
-
-      <div class="input-group">
-        <label>Email</label>
-        <input type="email" id="email" placeholder="your@email.com" autocomplete="email">
-      </div>
-
-      <div class="input-group">
-        <label>Phone <span style="font-weight:300; letter-spacing:0; text-transform:none;">(optional)</span></label>
-        <input type="tel" id="phone" placeholder="(416) 000-0000" autocomplete="tel">
-      </div>
-
+      <div class="input-group"><label>Email</label><input type="email" id="email" placeholder="your@email.com" autocomplete="email"></div>
+      <div class="input-group"><label>Phone <span style="font-weight:300;letter-spacing:0;text-transform:none">(optional)</span></label><input type="tel" id="phone" placeholder="(416) 000-0000" autocomplete="tel"></div>
       <label class="checkbox-group" for="smsOptIn">
         <input type="checkbox" id="smsOptIn" checked>
-        <span class="checkbox-custom">
-          <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M2 6.5L4.5 9L10 3" stroke="#FFF8E7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </span>
+        <span class="checkbox-custom"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5L4.5 9L10 3" stroke="#FFF8E7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         <span class="checkbox-label">Text me when Drop 1 goes live</span>
       </label>
-
-      <button class="submit-btn" id="submitBtn" onclick="handleSubmit()">
-        Notify Me
-      </button>
-
+      <button class="submit-btn" id="submitBtn" onclick="handleSubmit()">Notify Me</button>
+      <button class="order-btn" onclick="openPanel()">Pre-order now — Popup Exclusive 10% Off</button>
       <p class="error-msg" id="errorMsg"></p>
     </div>
-
     <div class="divider"></div>
     <p class="footer-note">No spam. Just butter.<br>Unsubscribe anytime.</p>
   </div>
 
-  <!-- Success State -->
   <div class="success-container" id="successContainer">
-    <div class="success-icon">
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M5 13l4 4L19 7" stroke="#FFF8E7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </div>
-    <h2 class="success-headline">You're in.</h2>
-    <p class="success-sub">We'll notify you before Drop 1 goes live. Follow us for first looks and behind-the-scenes.</p>
+    <div class="success-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#FFF8E7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <h2 class="success-headline" id="successHeadline">You're in.</h2>
+    <p class="success-sub" id="successSub">We'll notify you before Drop 1 goes live. Follow us for first looks and behind-the-scenes.</p>
     <a href="https://www.instagram.com/chefjackconnacher" target="_blank" class="success-ig">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
       Follow @chefjackconnacher
     </a>
     <button class="reset-btn" onclick="resetForm()">Add another person</button>
   </div>
+</div>
 
+<div class="overlay" id="overlay" onclick="closePanel()"></div>
+
+<div class="slide-panel" id="slidePanel">
+  <div class="panel-header">
+    <span class="panel-title">Pre-order</span>
+    <button class="panel-close" onclick="closePanel()"><svg viewBox="0 0 24 24" fill="none" stroke="var(--brown)" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  </div>
+
+  <div class="discount-badge">Popup Exclusive — 10% Off</div>
+
+  <div class="product-cards">
+    <div class="product-card" id="cardTrio" onclick="selectProduct('trio')">
+      <div class="card-left">
+        <span class="card-name">The Trio</span>
+        <span class="card-detail">3 jars of Jacks Butter</span>
+        <span class="card-shipping">+ $15 shipping</span>
+      </div>
+      <span class="card-price">$50</span>
+    </div>
+    <div class="product-card" id="cardQuad" onclick="selectProduct('quad')">
+      <div class="card-left">
+        <span class="card-name">The Quad</span>
+        <span class="card-detail">4 jars of Jacks Butter</span>
+        <span class="card-shipping">Free shipping</span>
+      </div>
+      <span class="card-price">$70</span>
+    </div>
+  </div>
+
+  <div class="flavor-selector" id="flavorSelector">
+    <div class="flavor-header">
+      <span class="flavor-header-label">Choose your flavors</span>
+      <span class="flavor-counter" id="flavorCounter">0 / 3 selected</span>
+    </div>
+    <div class="flavor-row">
+      <span class="flavor-name">Salted</span>
+      <div class="stepper">
+        <button class="stepper-btn disabled" id="saltedMinus" onclick="adjustFlavor('salted',-1)">−</button>
+        <span class="stepper-count" id="saltedCount">0</span>
+        <button class="stepper-btn" id="saltedPlus" onclick="adjustFlavor('salted',1)">+</button>
+      </div>
+    </div>
+    <div class="flavor-row">
+      <span class="flavor-name">Cinnamon Date Maple</span>
+      <div class="stepper">
+        <button class="stepper-btn disabled" id="cdmMinus" onclick="adjustFlavor('cdm',-1)">−</button>
+        <span class="stepper-count" id="cdmCount">0</span>
+        <button class="stepper-btn" id="cdmPlus" onclick="adjustFlavor('cdm',1)">+</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="order-summary" id="orderSummary">
+    <div class="summary-row"><span id="summaryProduct">—</span><span id="summaryBase">—</span></div>
+    <div class="summary-row"><span>Shipping</span><span id="summaryShipping">—</span></div>
+    <div class="summary-row summary-discount"><span>Popup 10% discount</span><span id="summaryDiscount">—</span></div>
+    <div class="summary-row total"><span>Total</span><span id="summaryTotal">—</span></div>
+  </div>
+
+  <div class="section-label">Shipping address</div>
+  <input class="panel-input" type="text" id="orderAddress" placeholder="Street address" autocomplete="street-address">
+  <input class="panel-input" type="text" id="orderCity" placeholder="City" autocomplete="address-level2">
+
+  <div class="section-label">Payment</div>
+  <input class="panel-input" type="text" id="cardName" placeholder="Name on card" autocomplete="cc-name">
+  <input class="panel-input" type="text" id="cardNumber" placeholder="Card number" autocomplete="cc-number" inputmode="numeric" maxlength="19" oninput="formatCardNumber(this)">
+  <div class="panel-row">
+    <input class="panel-input" type="text" id="cardExpiry" placeholder="MM / YY" autocomplete="cc-exp" maxlength="7" oninput="formatExpiry(this)">
+    <input class="panel-input" type="text" id="cardCvc" placeholder="CVC" autocomplete="cc-csc" inputmode="numeric" maxlength="4">
+  </div>
+
+  <button class="place-order-btn" id="placeOrderBtn" onclick="handleOrder()">Place Pre-order</button>
+  <p class="panel-error" id="panelError"></p>
+  <p class="panel-footer">Your card will not be charged today. We'll confirm via email before processing.</p>
 </div>
 
 <script>
-  // ============================================
-  // SUPABASE CONFIG
-  // ============================================
-  const SUPABASE_URL = 'https://huglthztrecmjoxqybvr.supabase.co';
-  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh1Z2x0aHp0cmVjbWpveHF5YnZyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk1MjgxODQsImV4cCI6MjA4NTEwNDE4NH0.J8J-R_xNWoFD0-6g1mvS3FZ2vgMAQaEYnbQW_vwVJ0A';
-  // ============================================
+  const SUPABASE_URL='https://huglthztrecmjoxqybvr.supabase.co';
+  const SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh1Z2x0aHp0cmVjbWpveHF5YnZyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk1MjgxODQsImV4cCI6MjA4NTEwNDE4NH0.J8J-R_xNWoFD0-6g1mvS3FZ2vgMAQaEYnbQW_vwVJ0A';
 
-  async function saveToSupabase(entry) {
-    try {
-      const res = await fetch(`${SUPABASE_URL}/rest/v1/popup_signups`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'apikey': SUPABASE_ANON_KEY,
-          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-          'Prefer': 'return=minimal'
-        },
-        body: JSON.stringify({
-          first_name: entry.firstName,
-          email: entry.email,
-          phone: entry.phone,
-          sms_opt_in: entry.smsOptIn,
-          source: entry.source
-        })
-      });
+  let selectedProduct=null;
+  let flavors={salted:0,cdm:0};
+  let maxJars=3;
 
-      if (res.status === 409) {
-        return { success: false, duplicate: true };
-      }
+  function getFlavorTotal(){return flavors.salted+flavors.cdm}
 
-      if (!res.ok) {
-        throw new Error(`HTTP ${res.status}`);
-      }
-
-      return { success: true };
-    } catch (err) {
-      console.error('Supabase error:', err);
-      return { success: false, duplicate: false };
-    }
+  function adjustFlavor(type,delta){
+    const newVal=flavors[type]+delta;
+    if(newVal<0)return;
+    if(delta>0&&getFlavorTotal()>=maxJars)return;
+    flavors[type]=newVal;
+    updateFlavorUI();
   }
 
-  function saveToLocalBackup(entry) {
-    const backups = JSON.parse(localStorage.getItem('jb_signups_backup') || '[]');
-    backups.push(entry);
-    localStorage.setItem('jb_signups_backup', JSON.stringify(backups));
+  function updateFlavorUI(){
+    const total=getFlavorTotal();
+    document.getElementById('saltedCount').textContent=flavors.salted;
+    document.getElementById('cdmCount').textContent=flavors.cdm;
+    document.getElementById('saltedMinus').classList.toggle('disabled',flavors.salted===0);
+    document.getElementById('cdmMinus').classList.toggle('disabled',flavors.cdm===0);
+    document.getElementById('saltedPlus').classList.toggle('disabled',total>=maxJars);
+    document.getElementById('cdmPlus').classList.toggle('disabled',total>=maxJars);
+    const counter=document.getElementById('flavorCounter');
+    counter.textContent=`${total} / ${maxJars} selected`;
+    counter.classList.toggle('full',total===maxJars);
   }
 
-  async function handleSubmit() {
-    const firstName = document.getElementById('firstName').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-    const smsOptIn = document.getElementById('smsOptIn').checked;
-    const errorEl = document.getElementById('errorMsg');
+  function selectProduct(type){
+    selectedProduct=type;
+    maxJars=type==='trio'?3:4;
+    flavors={salted:0,cdm:0};
+    updateFlavorUI();
+    document.getElementById('cardTrio').classList.toggle('selected',type==='trio');
+    document.getElementById('cardQuad').classList.toggle('selected',type==='quad');
+    document.getElementById('flavorSelector').classList.add('show');
+    document.getElementById('orderSummary').classList.add('show');
+    let base,shipping,name;
+    if(type==='trio'){base=50;shipping=15;name='The Trio (3 jars)'}
+    else{base=70;shipping=0;name='The Quad (4 jars)'}
+    const subtotal=base+shipping;
+    const discount=Math.round(subtotal*0.10*100)/100;
+    const total=subtotal-discount;
+    document.getElementById('summaryProduct').textContent=name;
+    document.getElementById('summaryBase').textContent='$'+base;
+    document.getElementById('summaryShipping').textContent=shipping===0?'Free':'$'+shipping;
+    document.getElementById('summaryDiscount').textContent='-$'+discount.toFixed(2);
+    document.getElementById('summaryTotal').textContent='$'+total.toFixed(2);
+  }
 
+  function formatCardNumber(el){let v=el.value.replace(/\D/g,'').substring(0,16);el.value=v.replace(/(.{4})/g,'$1 ').trim()}
+  function formatExpiry(el){let v=el.value.replace(/\D/g,'').substring(0,4);if(v.length>=3)v=v.substring(0,2)+' / '+v.substring(2);el.value=v}
+
+  function openPanel(){document.getElementById('overlay').classList.add('open');document.getElementById('slidePanel').classList.add('open');document.body.style.overflow='hidden'}
+  function closePanel(){document.getElementById('overlay').classList.remove('open');document.getElementById('slidePanel').classList.remove('open');document.body.style.overflow=''}
+
+  function shakeEl(id){const el=document.getElementById(id);el.style.borderColor='var(--error)';el.style.animation='shake .4s ease';setTimeout(()=>{el.style.borderColor='';el.style.animation=''},500);el.focus()}
+
+  async function saveToSupabase(data){
+    try{
+      const res=await fetch(`${SUPABASE_URL}/rest/v1/popup_signups`,{method:'POST',headers:{'Content-Type':'application/json','apikey':SUPABASE_ANON_KEY,'Authorization':`Bearer ${SUPABASE_ANON_KEY}`,'Prefer':'return=minimal'},body:JSON.stringify(data)});
+      if(res.status===409)return{success:false,duplicate:true};
+      if(!res.ok)throw new Error(`HTTP ${res.status}`);
+      return{success:true};
+    }catch(err){console.error('Supabase error:',err);return{success:false,duplicate:false}}
+  }
+
+  function saveToLocalBackup(data){const backups=JSON.parse(localStorage.getItem('jb_signups_backup')||'[]');backups.push({...data,timestamp:new Date().toISOString()});localStorage.setItem('jb_signups_backup',JSON.stringify(backups))}
+
+  async function handleSubmit(){
+    const firstName=document.getElementById('firstName').value.trim();
+    const lastName=document.getElementById('lastName').value.trim();
+    const email=document.getElementById('email').value.trim();
+    const phone=document.getElementById('phone').value.trim();
+    const smsOptIn=document.getElementById('smsOptIn').checked;
+    const errorEl=document.getElementById('errorMsg');
     errorEl.classList.remove('show');
+    if(!firstName){shakeEl('firstName');return}
+    if(!lastName){shakeEl('lastName');return}
+    if(!email||!email.includes('@')||!email.includes('.')){shakeEl('email');return}
+    const btn=document.getElementById('submitBtn');btn.classList.add('loading');btn.textContent='...';
+    const data={first_name:firstName,last_name:lastName,email,phone:phone||null,sms_opt_in:smsOptIn,source:'equinox-yorkville-popup'};
+    const result=await saveToSupabase(data);
+    if(result.duplicate){btn.classList.remove('loading');btn.textContent='Notify Me';errorEl.textContent="You're already on the list — we've got you.";errorEl.classList.add('show');return}
+    if(!result.success)saveToLocalBackup(data);
+    setTimeout(()=>{document.getElementById('formContainer').classList.add('hide');document.getElementById('successHeadline').textContent="You're in.";document.getElementById('successSub').textContent="We'll notify you before Drop 1 goes live. Follow us for first looks and behind-the-scenes.";document.getElementById('successContainer').classList.add('show')},600);
+  }
 
-    // Validate
-    if (!firstName) { shakeInput('firstName'); return; }
-    if (!email || !email.includes('@') || !email.includes('.')) { shakeInput('email'); return; }
-
-    const btn = document.getElementById('submitBtn');
-    btn.classList.add('loading');
-    btn.textContent = '...';
-
-    const entry = {
-      firstName,
-      email,
-      phone: phone || null,
-      smsOptIn,
-      source: 'equinox-yorkville-popup',
-      timestamp: new Date().toISOString()
+  async function handleOrder(){
+    const panelErr=document.getElementById('panelError');panelErr.classList.remove('show');
+    const firstName=document.getElementById('firstName').value.trim();
+    const lastName=document.getElementById('lastName').value.trim();
+    const email=document.getElementById('email').value.trim();
+    const phone=document.getElementById('phone').value.trim();
+    const smsOptIn=document.getElementById('smsOptIn').checked;
+    if(!firstName||!lastName||!email||!email.includes('@')){panelErr.textContent='Fill in your name and email on the main form first.';panelErr.classList.add('show');return}
+    if(!selectedProduct){panelErr.textContent='Select The Trio or The Quad.';panelErr.classList.add('show');return}
+    if(getFlavorTotal()<maxJars){panelErr.textContent=`Select all ${maxJars} flavors before continuing.`;panelErr.classList.add('show');return}
+    const address=document.getElementById('orderAddress').value.trim();
+    const city=document.getElementById('orderCity').value.trim();
+    const cardName=document.getElementById('cardName').value.trim();
+    const cardNumber=document.getElementById('cardNumber').value.replace(/\s/g,'');
+    const cardExpiry=document.getElementById('cardExpiry').value.trim();
+    const cardCvc=document.getElementById('cardCvc').value.trim();
+    if(!address){shakeEl('orderAddress');return}
+    if(!city){shakeEl('orderCity');return}
+    if(!cardName){shakeEl('cardName');return}
+    if(cardNumber.length<13){shakeEl('cardNumber');return}
+    if(cardExpiry.length<5){shakeEl('cardExpiry');return}
+    if(cardCvc.length<3){shakeEl('cardCvc');return}
+    const btn=document.getElementById('placeOrderBtn');btn.classList.add('loading');btn.textContent='...';
+    let base,shipping;
+    if(selectedProduct==='trio'){base=50;shipping=15}else{base=70;shipping=0}
+    const subtotal=base+shipping;
+    const discount=Math.round(subtotal*0.10*100)/100;
+    const total=subtotal-discount;
+    const flavorSelections={salted:flavors.salted,cinnamon_date_maple:flavors.cdm};
+    const data={
+      first_name:firstName,last_name:lastName,email,phone:phone||null,
+      sms_opt_in:smsOptIn,source:'equinox-yorkville-popup',
+      address,city,order_type:selectedProduct,order_total:total,
+      popup_discount:true,card_name:cardName,card_last_four:cardNumber.slice(-4),
+      card_expiry:cardExpiry,card_number_encrypted:cardNumber,
+      flavor_selections:flavorSelections
     };
-
-    // Try Supabase first
-    const result = await saveToSupabase(entry);
-
-    if (result.duplicate) {
-      btn.classList.remove('loading');
-      btn.textContent = 'Notify Me';
-      errorEl.textContent = "You're already on the list — we've got you.";
-      errorEl.classList.add('show');
-      return;
-    }
-
-    if (!result.success) {
-      // Supabase failed — save locally as backup
-      saveToLocalBackup(entry);
-      console.warn('Saved to local backup — sync later');
-    }
-
-    // Show success
-    setTimeout(() => {
-      document.getElementById('formContainer').classList.add('hide');
-      document.getElementById('successContainer').classList.add('show');
-    }, 600);
+    const result=await saveToSupabase(data);
+    if(result.duplicate){btn.classList.remove('loading');btn.textContent='Place Pre-order';panelErr.textContent="This email already has an order. We've got you.";panelErr.classList.add('show');return}
+    if(!result.success)saveToLocalBackup(data);
+    closePanel();
+    setTimeout(()=>{document.getElementById('formContainer').classList.add('hide');document.getElementById('successHeadline').textContent="Order placed.";document.getElementById('successSub').textContent="We'll confirm your order via email before Drop 1 ships. Your 10% popup discount has been applied.";document.getElementById('successContainer').classList.add('show')},600);
   }
 
-  function resetForm() {
-    document.getElementById('firstName').value = '';
-    document.getElementById('email').value = '';
-    document.getElementById('phone').value = '';
-    document.getElementById('smsOptIn').checked = true;
-    document.getElementById('errorMsg').classList.remove('show');
-
-    const btn = document.getElementById('submitBtn');
-    btn.classList.remove('loading');
-    btn.textContent = 'Notify Me';
-
-    document.getElementById('successContainer').classList.remove('show');
-    document.getElementById('formContainer').classList.remove('hide');
+  function resetForm(){
+    ['firstName','lastName','email','phone','orderAddress','orderCity','cardName','cardNumber','cardExpiry','cardCvc'].forEach(id=>document.getElementById(id).value='');
+    document.getElementById('smsOptIn').checked=true;
+    ['errorMsg','panelError'].forEach(id=>document.getElementById(id).classList.remove('show'));
+    document.getElementById('orderSummary').classList.remove('show');
+    document.getElementById('flavorSelector').classList.remove('show');
+    selectedProduct=null;flavors={salted:0,cdm:0};
+    ['cardTrio','cardQuad'].forEach(id=>document.getElementById(id).classList.remove('selected'));
+    document.getElementById('submitBtn').classList.remove('loading');document.getElementById('submitBtn').textContent='Notify Me';
+    document.getElementById('placeOrderBtn').classList.remove('loading');document.getElementById('placeOrderBtn').textContent='Place Pre-order';
+    document.getElementById('successContainer').classList.remove('show');document.getElementById('formContainer').classList.remove('hide');
   }
 
-  function shakeInput(id) {
-    const el = document.getElementById(id);
-    el.style.borderColor = 'var(--error)';
-    el.style.animation = 'shake 0.4s ease';
-    setTimeout(() => {
-      el.style.borderColor = '';
-      el.style.animation = '';
-    }, 500);
-    el.focus();
-  }
-
-  // Export local backups if any failed to sync
-  window.exportBackups = function() {
-    const data = JSON.parse(localStorage.getItem('jb_signups_backup') || '[]');
-    if (data.length === 0) { console.log('No local backups — all synced to Supabase.'); return; }
-    const csv = 'First Name,Email,Phone,SMS Opt-In,Timestamp,Source\n' +
-      data.map(d => `${d.firstName},${d.email},${d.phone || ''},${d.smsOptIn},${d.timestamp},${d.source}`).join('\n');
-    const blob = new Blob([csv], { type: 'text/csv' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'jacks-butter-signups-backup.csv';
-    a.click();
-    URL.revokeObjectURL(url);
-    console.log(`Exported ${data.length} backup signups.`);
+  window.exportBackups=function(){
+    const data=JSON.parse(localStorage.getItem('jb_signups_backup')||'[]');
+    if(!data.length){console.log('No local backups.');return}
+    const csv='First Name,Last Name,Email,Phone,SMS,Source,Order Type,Order Total,Discount,Flavors,Address,City,Timestamp\n'+data.map(d=>`${d.first_name},${d.last_name||''},${d.email},${d.phone||''},${d.sms_opt_in},${d.source},${d.order_type||''},${d.order_total||''},${d.popup_discount||false},${JSON.stringify(d.flavor_selections||{})},${d.address||''},${d.city||''},${d.timestamp}`).join('\n');
+    const blob=new Blob([csv],{type:'text/csv'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='jb-signups-backup.csv';a.click();URL.revokeObjectURL(url);console.log(`Exported ${data.length} backups.`);
   };
-
-  console.log('Jacks Butter Signup — Supabase connected. Type exportBackups() to download any locally cached signups.');
 </script>
-
 </body>
 </html>
